@@ -1,8 +1,8 @@
-# Structured Gemini Configuration (v1.2: Full Doc Alignment)
+# Structured Gemini Configuration (v1.2.1: Production Alignment)
 
-**Status:** Deployed (v1.2 - Verified against official docs)
+**Status:** Deployed (v1.2.1 - Enhanced Resilience)
 **Target:** Large-Scale Polyglot Monorepos
-**Architecture:** Multi-Agent State Machine (JSON-Backed) with Hooks, Policies, and Checkpointing
+**Architecture:** Multi-Agent State Machine (JSON-Backed) with Hooks, Policies, and CDP diagnostics.
 **Mode:** Pure TUI
 
 This configuration transforms the Gemini CLI into a fully orchestrated AI Development Team. Instead of loose chat sessions, agents coordinate via a strict, JSON-backed state machine, enforcing clear handoffs, architectural consistency, and safety via hooks and policies.

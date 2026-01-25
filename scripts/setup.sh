@@ -24,6 +24,14 @@ check_dependencies() {
     if ! command -v rg &> /dev/null; then
         echo "Warning: 'rg' (ripgrep) not found. Performance may be degraded."
     fi
+
+    # Check for Chrome Debugging Port
+    if command -v ss &> /dev/null || command -v lsof &> /dev/null; then
+        if ! (ss -tunlp | grep -q 9222 || lsof -i :9222 &> /dev/null); then
+            echo "Note: Chrome port 9222 is not active. Browser-expert will be offline."
+            echo "      Start Chrome with --remote-debugging-port=9222 to enable."
+        fi
+    fi
 }
 
 initialize_local_session() {

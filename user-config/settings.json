@@ -113,9 +113,8 @@
     "browser": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-google-chrome"],
-      "env": {
-        "CHROME_PATH": "/usr/bin/google-chrome"
-      }
+      "timeout": 15000,
+      "trust": true
     }
   }
 }
