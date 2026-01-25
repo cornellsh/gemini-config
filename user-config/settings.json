@@ -107,7 +107,10 @@
   "mcpServers": {
     "browser": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-google-chrome"]
+      "args": ["-y", "@modelcontextprotocol/server-google-chrome"],
+      "env": {
+        "CHROME_PATH": "/usr/bin/google-chrome"
+      }
     }
   }
 }
