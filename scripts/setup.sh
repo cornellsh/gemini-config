@@ -5,8 +5,9 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 USER_CONFIG_SRC="$REPO_ROOT/user-config"
 GLOBAL_GEMINI_DIR="$HOME/.gemini"
 LOCAL_GEMINI_DIR="$REPO_ROOT/.gemini"
+GLOBAL_BIN_DIR="$HOME/.local/bin"
 
-echo "Structured Gemini Configuration Setup (v1.2.2)"
+echo "Structured Gemini Configuration Setup (v1.2.3)"
 echo ""
 
 check_dependencies() {
@@ -82,7 +83,7 @@ EOF
 
 install_global_config() {
     echo ""
-    read -p "Install configuration globally to $GLOBAL_GEMINI_DIR? [y/N] " -n 1 -r
+    read -p "Install configuration and scripts globally? [y/N] " -n 1 -r
     echo ""
 
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -91,6 +92,7 @@ install_global_config() {
 
     echo "Installing global configuration..."
     mkdir -p "$GLOBAL_GEMINI_DIR"/{skills,context,hooks,policies,commands}
+    mkdir -p "$GLOBAL_BIN_DIR"
 
     symlink_file() {
         local src="$1"
@@ -117,6 +119,7 @@ install_global_config() {
         done
     }
 
+    # Symlink core configuration
     symlink_file "$USER_CONFIG_SRC/settings.json" "$GLOBAL_GEMINI_DIR/settings.json"
     symlink_dir_contents "$USER_CONFIG_SRC/skills" "$GLOBAL_GEMINI_DIR/skills"
     rm -rf "$GLOBAL_GEMINI_DIR/context"
@@ -124,15 +127,16 @@ install_global_config() {
     symlink_dir_contents "$USER_CONFIG_SRC/hooks" "$GLOBAL_GEMINI_DIR/hooks"
     symlink_dir_contents "$USER_CONFIG_SRC/policies" "$GLOBAL_GEMINI_DIR/policies"
     symlink_dir_contents "$USER_CONFIG_SRC/commands" "$GLOBAL_GEMINI_DIR/commands"
+
+    # Install global browser launch script
+    echo "Installing global scripts to $GLOBAL_BIN_DIR..."
+    ln -sf "$REPO_ROOT/scripts/launch_browser.sh" "$GLOBAL_BIN_DIR/gemini-browser-launch"
 }
 
 set_permissions() {
     echo "Setting file permissions..."
     chmod +x "$REPO_ROOT/scripts/"*.sh 2>/dev/null || true
-    
-    # Secure all skill-based internal tools
     find "$USER_CONFIG_SRC/skills" -name "*.sh" -exec chmod +x {} \;
-    find "$USER_CONFIG_SRC/skills" -name "*.js" -exec chmod +x {} \;
 }
 
 check_dependencies
@@ -142,10 +146,7 @@ set_permissions
 
 echo ""
 echo "Setup complete."
-echo "Configured for: /refactor, /analyze, /qa, /mcp"
-echo ""
-echo "Recommended: Enable browser debugging:"
-echo "1. gemini extensions install https://github.com/ChromeDevTools/chrome-devtools-mcp"
-echo "2. run scripts/launch_browser.sh"
+echo "Global scripts installed to $GLOBAL_BIN_DIR"
+echo "Ensure $GLOBAL_BIN_DIR is in your PATH."
 echo ""
 echo "Start by running 'gemini' in your terminal."

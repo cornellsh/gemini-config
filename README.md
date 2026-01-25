@@ -12,18 +12,7 @@ cd gemini-config
 ./scripts/setup.sh
 ```
 
-The script verifies system requirements and creates the necessary tracking files in `.gemini/`.
-
-### Enabling Browser Debugging
-
-To allow the Browser Expert to debug your live application, install the official Chrome DevTools extension:
-
-```bash
-gemini extensions install https://github.com/ChromeDevTools/chrome-devtools-mcp
-```
-
-Ensure Chrome is running with the remote debugging port enabled:
-`google-chrome --remote-debugging-port=9222`
+The script verifies system requirements, creates tracking files in `.gemini/`, and optionally installs the configuration and global scripts (`gemini-browser-launch`) to your home directory.
 
 ## Architecture
 
@@ -40,7 +29,7 @@ The system uses a state-first approach where all agent actions are governed by a
 - Polyglot Expert: Implements code across Python and TypeScript.
 - Database Architect: Manages storage schemas and migrations.
 - Browser Expert: Performs frontend debugging via the Chrome DevTools Protocol.
-- Git Expert: Handles commits and repository stability.
+- Git Expert: Handles commits and repository history.
 - QA Verifier: Executes automated tests and security validations.
 - DX Engineer: Optimizes internal tooling and environments.
 - Knowledge Architect: Maintains technical documentation and manuals.
@@ -54,6 +43,20 @@ The following commands initiate coordinated agent loops:
 - `/analyze <path>`: Evaluate architecture and identify technical debt.
 - `/qa`: Run project tests and verify completed work.
 - `/mcp`: View connection status for external tools.
+
+## Browser Debugging
+
+To use the Browser Expert, you must have Chrome running with remote debugging enabled. You can use the global command installed by `setup.sh`:
+
+```bash
+gemini-browser-launch
+```
+
+Additionally, install the official extension:
+
+```bash
+gemini extensions install https://github.com/ChromeDevTools/chrome-devtools-mcp
+```
 
 ## Safety and Extensions
 

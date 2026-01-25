@@ -8,19 +8,22 @@ if curl -s "http://127.0.0.1:$PORT/json/version" > /dev/null; then
     echo "{\"status\": \"ready\", \"port\": $PORT}"
     exit 0
 else
-    # Attempt to auto-launch using our robust script
-    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    # Path relative to the skills folder or use absolute from repo root
-    LAUNCH_SCRIPT="$GEMINI_PROJECT_DIR/scripts/launch_browser.sh"
+    # Attempt to auto-launch using global command or repo-relative script
+    if command -v gemini-browser-launch &> /dev/null; then
+        echo "Browser not found. Attempting auto-launch via global command..." >&2
+        gemini-browser-launch > /dev/null 2>&1
+    elif [ -f "$GEMINI_PROJECT_DIR/scripts/launch_browser.sh" ]; then
+        echo "Browser not found. Attempting auto-launch via local script..." >&2
+        bash "$GEMINI_PROJECT_DIR/scripts/launch_browser.sh" > /dev/null 2>&1
+    else
+        echo "{\"status\": \"error\", \"message\": \"Chrome launcher not found.\"}"
+        exit 1
+    fi
     
-    if [ -f "$LAUNCH_SCRIPT" ]; then
-        echo "Browser not found. Attempting auto-launch..." >&2
-        bash "$LAUNCH_SCRIPT" > /dev/null 2>&1
-        
-        if curl -s "http://127.0.0.1:$PORT/json/version" > /dev/null; then
-            echo "{\"status\": \"launched\", \"port\": $PORT}"
-            exit 0
-        fi
+    # Verify launch success
+    if curl -s "http://127.0.0.1:$PORT/json/version" > /dev/null; then
+        echo "{\"status\": \"launched\", \"port\": $PORT}"
+        exit 0
     fi
     
     echo "{\"status\": \"error\", \"message\": \"Chrome not found on port $PORT and auto-launch failed.\"}"
