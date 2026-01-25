@@ -66,6 +66,7 @@ The single source of truth. It tracks:
 | **Orchestrator** | **Session Manager**. Manages JSON state, dependency resolution. Syncs `write_todos`. | `write_todos`, `save_memory` |
 | **Polyglot Expert** | **Implementation**. Claims tasks. "Look Before You Leap" via `web_fetch`. | `replace`, `web_fetch`, `search_file_content` |
 | **QA Verifier** | **Gatekeeper**. Active verification. Enforces Policy compliance. | `search_file_content`, `run_shell_command` |
+| **Browser Expert** | **Automation**. Visual QA and console debugging via Chrome DevTools MCP. | `browser_navigate`, `browser_screenshot` |
 | **Git Expert** | **Release Manager**. Atomic commits. Respects `pre-commit` hooks. | `run_shell_command` (git) |
 | **Tech Debt Tracker**| **Scanner**. High-speed grep for TODOs. | `search_file_content`, `save_memory` |
 
