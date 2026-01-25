@@ -7,7 +7,7 @@ GLOBAL_GEMINI_DIR="$HOME/.gemini"
 LOCAL_GEMINI_DIR="$REPO_ROOT/.gemini"
 GLOBAL_BIN_DIR="$HOME/.local/bin"
 
-echo "Structured Gemini Configuration Setup (v1.2.4)"
+echo "Structured Gemini Configuration Setup (v1.2.5)"
 echo ""
 
 check_dependencies() {
@@ -97,7 +97,7 @@ install_global_config() {
             ;;
     esac
 
-    mkdir -p "$GLOBAL_GEMINI_DIR"/{skills,context,hooks,policies,commands}
+    mkdir -p "$GLOBAL_GEMINI_DIR"
     mkdir -p "$GLOBAL_BIN_DIR"
 
     symlink_file() {
@@ -113,27 +113,37 @@ install_global_config() {
         fi
     }
 
-    symlink_dir_contents() {
+    # Robust directory syncing: remove destination and recreate symlinks to match source exactly
+    sync_dir() {
         local src_dir="$1"
         local dest_dir="$2"
+        echo "   Syncing $(basename "$dest_dir")..."
+        
+        # Remove old directory or symlink if it exists to purge deleted items
+        if [ -d "$dest_dir" ] || [ -L "$dest_dir" ]; then
+            rm -rf "$dest_dir"
+        fi
         mkdir -p "$dest_dir"
+
         for item in "$src_dir"/*; do
             [ -e "$item" ] || continue
             local item_name=$(basename "$item")
-            rm -rf "$dest_dir/$item_name"
             ln -sf "$item" "$dest_dir/$item_name"
         done
     }
 
     symlink_file "$USER_CONFIG_SRC/settings.json" "$GLOBAL_GEMINI_DIR/settings.json"
-    symlink_dir_contents "$USER_CONFIG_SRC/skills" "$GLOBAL_GEMINI_DIR/skills"
+    
+    sync_dir "$USER_CONFIG_SRC/skills" "$GLOBAL_GEMINI_DIR/skills"
+    sync_dir "$USER_CONFIG_SRC/hooks" "$GLOBAL_GEMINI_DIR/hooks"
+    sync_dir "$USER_CONFIG_SRC/policies" "$GLOBAL_GEMINI_DIR/policies"
+    sync_dir "$USER_CONFIG_SRC/commands" "$GLOBAL_GEMINI_DIR/commands"
+
+    # Context handled separately as it's often a single target
     rm -rf "$GLOBAL_GEMINI_DIR/context"
     ln -sf "$USER_CONFIG_SRC/context" "$GLOBAL_GEMINI_DIR/context"
-    symlink_dir_contents "$USER_CONFIG_SRC/hooks" "$GLOBAL_GEMINI_DIR/hooks"
-    symlink_dir_contents "$USER_CONFIG_SRC/policies" "$GLOBAL_GEMINI_DIR/policies"
-    symlink_dir_contents "$USER_CONFIG_SRC/commands" "$GLOBAL_GEMINI_DIR/commands"
 
-    echo "Installing global scripts to $GLOBAL_BIN_DIR..."
+    echo "   Installing global scripts to $GLOBAL_BIN_DIR..."
     ln -sf "$REPO_ROOT/scripts/launch_browser.sh" "$GLOBAL_BIN_DIR/gemini-browser-launch"
 }
 
