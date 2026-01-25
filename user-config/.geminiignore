@@ -1,0 +1,28 @@
+# Version Control
+.git/
+.svn/
+
+# Build & Dependencies
+node_modules/
+dist/
+build/
+coverage/
+__pycache__/
+*.pyc
+venv/
+.venv/
+.env
+.tox/
+.pytest_cache/
+.mypy_cache/
+.npm/
+.yarn/
+
+# IDE
+.vscode/
+.idea/
+
+# Secrets
+.env.local
+*.pem
+*.key

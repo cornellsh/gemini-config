@@ -1,0 +1,8 @@
+# Session State
+.gemini/
+!.gemini/.keep
+
+# System
+.DS_Store
+node_modules/
+*.log

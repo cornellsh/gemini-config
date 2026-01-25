@@ -1,0 +1,10 @@
+description = "Deep architectural analysis with context snapshotting."
+prompt = """
+ACTIVATE SKILL: orchestrator
+INSTRUCTION:
+1. Snapshot current context (module-graph, etc.) to `SESSION_PLAN.json`.
+2. Create a new task "Analyze {{args}}" in `SESSION_PLAN.json` (assigned_to: orchestrator, status: in_progress).
+3. Perform the analysis using search tools.
+4. Update the task with findings and mark as `completed`.
+5. Sync `SESSION_PLAN.md`.
+"""

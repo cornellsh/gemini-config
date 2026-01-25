@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "before_session": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mkdir -p .gemini && [ ! -f .gemini/SESSION_PLAN.json ] && echo '{\"version\": \"1.0\", \"tasks\": [], \"context_snapshots\": {}}' > .gemini/SESSION_PLAN.json; [ ! -f .gemini/SESSION_PLAN.md ] && echo '# Session Plan' > .gemini/SESSION_PLAN.md",
+            "name": "Init Session Plan"
+          }
+        ]
+      }
+    ]
+  }
+}

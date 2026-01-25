@@ -1,0 +1,10 @@
+description = "Trigger a structured QA review cycle."
+prompt = """
+ACTIVATE SKILL: qa-verifier
+INSTRUCTION:
+1. Read `SESSION_PLAN.json`.
+2. Find all tasks with `status: completed`.
+3. For each task, perform validation (code review, security check, test verification).
+4. Update status to `qa_passed` or `in_progress` (if rejected).
+5. Sync `SESSION_PLAN.md`.
+"""

@@ -1,0 +1,9 @@
+description = "Plan-driven refactoring with structured state tracking."
+prompt = """
+ACTIVATE SKILL: orchestrator
+INSTRUCTION:
+1. Create a new task "Refactor {{args}}" in `SESSION_PLAN.json` (assigned_to: polyglot-expert, status: pending).
+2. Snapshot relevant context.
+3. Sync `SESSION_PLAN.md`.
+4. Explicitly delegate to `polyglot-expert` to begin implementation.
+"""
