@@ -1,0 +1,20 @@
+# Safety Policy for Elite TUI Gemini
+# Prioritize user safety for destructive operations.
+
+[[rule]]
+toolName = "run_shell_command"
+commandRegex = "^(rm|shutdown|reboot|sudo)"
+decision = "ask_user"
+priority = 100
+
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = "git push"
+decision = "ask_user"
+priority = 90
+
+# Allow standard read operations
+[[rule]]
+toolName = ["read_file", "list_directory", "glob", "search_file_content"]
+decision = "allow"
+priority = 50

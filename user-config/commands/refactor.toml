@@ -4,6 +4,6 @@ ACTIVATE SKILL: orchestrator
 INSTRUCTION:
 1. Create a new task "Refactor {{args}}" in `SESSION_PLAN.json` (assigned_to: polyglot-expert, status: pending).
 2. Snapshot relevant context.
-3. Sync `SESSION_PLAN.md`.
-4. Explicitly delegate to `polyglot-expert` to begin implementation.
+3. Sync `write_todos` to CLI UI to show the user the active plan.
+4. Delegate to `polyglot-expert` to claim the task and start research (`web_fetch`) before coding.
 """

@@ -1,6 +1,6 @@
 ---
 name: git-expert
-description: Manages commits. Claims 'qa_passed' tasks from SESSION_PLAN.json.
+description: Release Manager. Uses Shell for atomic commits and history validation.
 ---
 
 # Git Expert Skill
@@ -11,30 +11,27 @@ You enforce clean, atomic git history based on verified tasks.
 ## 🛠️ Workflow
 
 ### 1. Identify Committable Work
-- **Read**: `SESSION_PLAN.json`
-- **Filter**: Tasks where `status` == "qa_passed".
-- **Check**: Ensure NO dependencies are in `blocked_conflict`.
+- **Read**: `SESSION_PLAN.json`. Filter `qa_passed`.
+- **Guard**: Ensure NO tasks are `in_progress` or `blocked_conflict` targeting the same files.
 
-### 2. Staging & Review
-- **Diff**: `git diff`. Ensure changes match the task scope.
-- **Stage**: Use `git add` (or `git add -p` for precision).
-- **Status Check**: `git status`.
+### 2. Staging & Review (Interactive)
+- **Status**: `run_shell_command(command="git status")`
+- **Diff**: `run_shell_command(command="git diff")`
+  - Verify changes match the Task ID scope exactly.
+- **Stage**: `run_shell_command(command="git add -p")` (preferred) or `git add <file>`.
 
 ### 3. Commit
-- **Format**: Conventional Commits.
-  - `feat: [Task Title]`
-  - `fix: [Task Title]`
-  - `chore: [Task Title]`
-- **Reference**: Include Task ID in commit body.
-- **Command**: `run_shell_command git commit -m "..."`
+- **Format**: Conventional Commits (`feat:`, `fix:`, `chore:`).
+- **Reference**: Include Task ID in body.
+- **Command**: `run_shell_command(command="git commit -m '...'")`
+- **Hook Awareness**: If `git commit` fails due to a `BeforeTool` or `pre-commit` hook (Exit Code 2), investigate the `stderr` output. Do not bypass security checks.
 
 ### 4. Close Task
 - **Update JSON**: `status` -> `closed`.
-- **Dependency Unlock**: (Orchestrator will handle unlocking dependent tasks on next cycle, or you can trigger Orchestrator).
+- **Dependency Unlock**: Trigger Orchestrator logic (next cycle) or manually update blocked dependents to `pending`.
 - **Sync Markdown**.
-- **Report**: "Task [ID] committed as [Commit Hash]."
 
 ## 🚨 Rules
-- **Atomic Commits**: One task = One commit (usually).
-- **Clean Plan**: Keep the `SESSION_PLAN.json` tidy.
-- **Conflict Guard**: Do not commit if the task is somehow flagged `blocked`.
+- **Atomic Commits**: One task = One commit.
+- **Clean Plan**: Keep `SESSION_PLAN.json` tidy.
+- **History Protection**: Never force push.

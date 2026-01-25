@@ -1,13 +1,13 @@
-# Elite TUI Gemini Configuration (v1.1)
+# Elite TUI Gemini Configuration (v1.2)
 
 > **Structured Orchestration for Large-Scale Polyglot Monorepos**
 
-This configuration transforms the Gemini CLI into a **fully orchestrated AI Development Team**. Instead of loose chat sessions, agents coordinate via a strict, JSON-backed state machine, enforcing clear handoffs, architectural consistency, and reproducible workflows.
+This configuration transforms the Gemini CLI into a **fully orchestrated AI Development Team**. Instead of loose chat sessions, agents coordinate via a strict, JSON-backed state machine, enforcing clear handoffs, architectural consistency, and reproducible workflows with **Hooks** and **Policies**.
 
 ## 🚀 Quickstart
 
 ### 1. Installation
-Clone this repository to your preferred location:
+Clone this repository:
 
 ```bash
 git clone https://github.com/cornellsh/gemini-config.git
@@ -15,13 +15,30 @@ cd gemini-config
 ./scripts/setup.sh
 ```
 
-### 2. Configuration
-Point your Gemini CLI to this configuration folder:
+**What setup.sh does:**
+- Checks dependencies (`node`, `rg`, `gemini`).
+- Initializes `SESSION_PLAN.json` (v1.2) with Hook and Policy tracking.
+- Creates `~/.gemini/hooks` and `~/.gemini/policies` directories.
+- Optionally installs global configuration by symlinking `user-config`.
 
-```bash
-# Example (if supported by your CLI version)
-gemini config set user_config_path $(pwd)/user-config
-```
+### 2. Tool & Safety Architecture (v1.2)
+This config is optimized for the full Gemini CLI ecosystem:
+
+#### 🛡️ Policies (`user-config/policies`)
+The **Policy Engine** enforces granular access control:
+- **Destructive Ops**: `rm`, `shutdown`, `sudo` require explicit confirmation.
+- **Git Safety**: `git push` triggers a confirmation prompt.
+- **Read-Only**: `read_file`, `glob`, `search` are auto-allowed.
+
+#### 🪝 Hooks (`user-config/hooks`)
+Scripts intercept tool execution for auditing and safety:
+- **Audit Logging**: A default `log-tools.sh` records every tool call to `~/.gemini/tool-audit.log`.
+- **Security Gates**: Hooks can block tools (Exit Code 2) if secrets are detected.
+
+#### 🛠️ Tool-Native Agents
+- **Polyglot Expert**: Uses `replace` (Smart Edit) with multi-stage correction. Research first via `web_fetch`.
+- **QA Verifier**: Uses `search_file_content` (ripgrep) for high-speed security scans.
+- **Orchestrator**: Syncs tasks to the native CLI UI via `write_todos`.
 
 ### 3. Workflow
 Start the CLI and use the orchestrated commands:
@@ -29,74 +46,47 @@ Start the CLI and use the orchestrated commands:
 ```text
 /refactor user_auth     # -> Creates task, delegates to Polyglot Expert
 /analyze backend/api    # -> Snapshots architecture, scans for drift
-/qa                     # -> Triggers batch review of completed tasks
+/qa                     # -> Triggers batch review (runs actual tests)
+/mcp                    # -> Check status of connected tools
 ```
 
 ---
 
 ## 🧠 Architecture (Structured Orchestration)
 
-The system operates on a **State-First** principle. Agents do not guess; they read the Plan.
-
 ### 1. The Session Plan (`.gemini/SESSION_PLAN.json`)
 The single source of truth. It tracks:
 - **Tasks**: ID, Status, Priority, Dependencies.
-- **Context Snapshots**: Hashes of critical context files to prevent hallucinations on stale code.
-- **Agent Handoffs**: Who is holding the "conch".
+- **Context Snapshots**: Hashes of critical context files.
+- **Tool State**: Active MCP servers and Hook/Policy events.
 
 ### 2. The Agents (Skills)
-| Role | Responsibility | Trigger |
+| Role | Responsibility | Tools & Capabilities |
 | :--- | :--- | :--- |
-| **Orchestrator** | **Session Manager**. Manages JSON state, dependency resolution, conflict detection, and Markdown syncing. | User Input / Plan Updates |
-| **Polyglot Expert** | **Implementation**. Claims verified tasks. Enforces Python ↔ TypeScript contracts. **Blocks** if dependencies are open. | `assigned_to: polyglot-expert` |
-| **QA Verifier** | **Gatekeeper**. Reviews code, security, and tests. Only passes valid work. Escalates priority if rejecting repeatedly. | `status: completed` |
-| **Git Expert** | **release Manager**. Commits only `qa_passed` tasks. Enforces Conventional Commits. | `status: qa_passed` |
-| **Tech Debt Tracker**| **Scanner**. Greps codebase for TODOs and logs them as low-priority tasks. | `status: pending` |
+| **Orchestrator** | **Session Manager**. Manages JSON state, dependency resolution. Syncs `write_todos`. | `write_todos`, `save_memory` |
+| **Polyglot Expert** | **Implementation**. Claims tasks. "Look Before You Leap" via `web_fetch`. | `replace`, `web_fetch`, `search_file_content` |
+| **QA Verifier** | **Gatekeeper**. Active verification. Enforces Policy compliance. | `search_file_content`, `run_shell_command` |
+| **Git Expert** | **Release Manager**. Atomic commits. Respects `pre-commit` hooks. | `run_shell_command` (git) |
+| **Tech Debt Tracker**| **Scanner**. High-speed grep for TODOs. | `search_file_content`, `save_memory` |
 
-### 3. Task States
-- `pending`: Ready to be claimed (if dependencies met).
-- `blocked`: Waiting on dependencies.
-- `blocked_conflict`: Targets overlapping files with another active task.
-- `in_progress`: Currently being worked on.
-- `completed`: Implementation done, awaiting QA.
-- `qa_passed`: Verified, awaiting commit.
-- `closed`: Committed and archived.
+### 3. Advanced Configuration
 
----
-
-## 📂 Directory Structure
-
-```text
-gemini-config/
-├── .gemini/                 # Local session state (Ignored by Git)
-│   ├── SESSION_PLAN.json    # The Brain
-│   └── SESSION_PLAN.md      # The Display (Read-Only)
-├── scripts/
-│   └── setup.sh             # Idempotent setup script
-├── user-config/
-│   ├── skills/              # Agent Logic (JSON-Aware)
-│   │   ├── orchestrator/
-│   │   ├── polyglot-expert/
-│   │   ├── qa-verifier/
-│   │   └── git-expert/
-│   ├── commands/            # /refactor, /analyze, /qa
-│   └── context/             # Static Knowledge Base
-└── GEMINI_CONFIG_HIFI.md    # Detailed Architecture Spec
+#### Sandboxing
+For maximum safety, especially with `run_shell_command`, enable sandboxing:
+```bash
+gemini --sandbox
+# OR
+export GEMINI_SANDBOX=docker
 ```
 
-## 🛠️ Advanced Usage
+#### Memory Integration
+The system uses `save_memory` to persist "Project Axioms" (e.g., "Always use Pydantic v2") across sessions.
 
-### Conflict Handling
-If two tasks target the same file, the **Orchestrator** will mark the lower-priority one as `blocked_conflict`.
-- **Resolution**: Finish the active task first. The system will auto-resolve on the next cycle.
-
-### Priority Escalation
-Tasks left in `pending` for >2 cycles are automatically escalated (`low` -> `medium` -> `high`).
-- **Override**: You can manually edit `SESSION_PLAN.json` to adjust priority if needed.
-
-### Context Snapshots
-Before any major operation (`/analyze` or `/refactor`), the Orchestrator snapshots `context/components/module-graph.md`.
-- **Drift**: If the live code diverges from the snapshot, Agents will request a re-sync.
+#### Customizing Hooks
+Add your own scripts to `~/.gemini/hooks/` and reference them in `settings.json`.
+*   **Stdin**: JSON input (tool name, args).
+*   **Stdout**: JSON output (decision: allow/deny).
+*   **Stderr**: Logging.
 
 ---
 
