@@ -1,4 +1,4 @@
-# Elite TUI Gemini Configuration (v1.2: Structured Orchestration)
+# Structured Gemini Configuration (v1.2: Structured Orchestration)
 
 **Status:** Deployed (v1.2)
 **Target:** Large-Scale Polyglot Monorepos

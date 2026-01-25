@@ -11,7 +11,7 @@ LOCAL_GEMINI_DIR="$REPO_ROOT/.gemini"
 
 print_header() {
     echo "========================================================"
-    echo "Elite TUI Gemini Configuration Setup (v1.2)"
+    echo "Structured Gemini Configuration Setup (v1.2)"
     echo "Structured Orchestration | Hooks | Policies"
     echo "========================================================"
 }

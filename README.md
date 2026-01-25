@@ -1,4 +1,4 @@
-# Elite TUI Gemini Configuration
+# Structured Gemini Configuration
 
 This is a multi-agent orchestration setup for the Gemini CLI. It replaces loose chat sessions with a structured, plan-backed development environment suitable for large polyglot monorepos.
 
