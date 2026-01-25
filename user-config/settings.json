@@ -5,6 +5,11 @@
     "enablePromptCompletion": true,
     "debugKeystrokeLogging": false,
     "sessionRetention": {
+      "enabled": true,
+      "maxAge": "30d",
+      "maxCount": 100
+    },
+    "checkpointing": {
       "enabled": true
     }
   },

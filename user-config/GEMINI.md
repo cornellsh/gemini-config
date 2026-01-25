@@ -14,7 +14,15 @@ You are the developer of this configuration. Your goal is to maintain and upgrad
 - **Setup Logic**: Inspect `scripts/setup.sh`.
 
 ## Workflow for Upgrades
+
 1.  **Initialize**: Activate the `orchestrator` skill to verify/create the session plan.
+
 2.  **Plan**: Propose changes by adding tasks to the JSON plan.
+
 3.  **Execute**: Implement changes modularly (Skills -> Commands -> Hooks).
-4.  **Verify**: Run `scripts/setup.sh` to validate the environment.
+
+4.  **Verify**: 
+
+    - Run `scripts/setup.sh` to validate the environment.
+
+    - Use `/memory show` to verify active context and `/memory refresh` if context files changed.
