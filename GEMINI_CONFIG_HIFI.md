@@ -41,11 +41,13 @@ Read-only Markdown projection. Automatically synced by the orchestrator skill af
 | Agent | Responsibility | Tools & Capabilities |
 | :--- | :--- | :--- |
 | **Orchestrator** | **Session Manager**. Manages JSON state, dependencies, conflict detection. Syncs native `write_todos` UI. | `write_todos`, `save_memory`, `read/write_file` |
+| **Product Strategist** | **Intent & UX**. Translates user stories into specs and design flows. | `design.md`, `openspec/`, `web_fetch` |
 | **Polyglot Expert** | **Implementation**. Claims verified tasks. Enforces contracts. Research before coding ("Look Before You Leap"). | `replace` (Smart Edit), `web_fetch`, `search_file_content` |
 | **QA Verifier** | **Gatekeeper**. Reviews code, security scans, runs **active tests**. Enforces Policies. | `search_file_content` (ripgrep), `run_shell_command` |
 | **Browser Expert** | **Frontend Debugger**. Protocol-level (CDP) debugging, console monitoring, and network analysis via official Chrome DevTools MCP. | `browser_navigate`, `browser_screenshot`, `browser_get_console_logs` |
 | **Git Expert** | **Release Manager**. Atomic commits. Validates history. Respects `pre-commit` hooks. | `run_shell_command` (git) |
-| **Tech Debt Tracker** | **Scanner**. High-speed grep for TODOs/Fixmes. | `search_file_content`, `save_memory` |
+| **Knowledge Architect** | **Technical Writing**. Produces API docs, manuals, and system diagrams. | `README.md`, `CHANGELOG.md`, `API.md` |
+| **Debt Architect** | **Refactoring**. Scalability, performance optimization, and axiom preservation. | `search_file_content`, `save_memory` |
 
 ## Safety & Governance (v1.2)
 
