@@ -14,6 +14,17 @@ cd gemini-config
 
 The script verifies system requirements and creates the necessary tracking files in `.gemini/`.
 
+### Enabling Browser Debugging
+
+To allow the Browser Expert to debug your live application, install the official Chrome DevTools extension:
+
+```bash
+gemini extensions install https://github.com/ChromeDevTools/chrome-devtools-mcp
+```
+
+Ensure Chrome is running with the remote debugging port enabled:
+`google-chrome --remote-debugging-port=9222`
+
 ## Architecture
 
 The system uses a state-first approach where all agent actions are governed by a central plan.
@@ -25,10 +36,15 @@ The system uses a state-first approach where all agent actions are governed by a
 
 ### Specialized Agents
 - Orchestrator: Manages the task queue, dependencies, and file locks.
+- Product Strategist: Defines requirements and technical intent.
 - Polyglot Expert: Implements code across Python and TypeScript.
-- QA Verifier: Executes automated tests and security validations.
+- Database Architect: Manages storage schemas and migrations.
 - Browser Expert: Performs frontend debugging via the Chrome DevTools Protocol.
-- Git Expert: Handles commits and repository history.
+- Git Expert: Handles commits and repository stability.
+- QA Verifier: Executes automated tests and security validations.
+- DX Engineer: Optimizes internal tooling and environments.
+- Knowledge Architect: Maintains technical documentation and manuals.
+- Debt Architect: Manages scalability and refactoring.
 
 ## Common Workflows
 

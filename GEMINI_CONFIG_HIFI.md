@@ -44,7 +44,7 @@ Read-only Markdown projection. Automatically synced by the orchestrator skill af
 | **Product Strategist** | **Intent & UX**. OpenSpec governance and technical requirement drafting. | `openspec/`, `design.md` |
 | **Polyglot Expert** | **Logic Lead**. High-fidelity Python/TypeScript implementation. | `replace`, `web_fetch` |
 | **Database Architect** | **Data Lead**. Schema design, migrations, and indexing. | `SQL`, `migrations/`, `ORM` |
-| **Browser Specialist** | **Frontend Lead**. CDP diagnostics and visual fidelity. | `browser_navigate`, `CDP` |
+| **Browser Expert** | **Frontend Debugger**. Protocol-level (CDP) diagnostics using the official chrome-devtools-mcp extension. | `browser_get_console_logs`, `CDP` |
 | **Infra/SRE Engineer** | **Ops Lead**. CI/CD, Docker, and repository stability. | `docker`, `actions/`, `git` |
 | **QA/Sec Auditor** | **Gatekeeper**. Active verification and secret scanning. | `search_file_content`, `tests/` |
 | **DX Engineer** | **Tooling Lead**. Automation, ergonomics, and setup scripts. | `scripts/`, `setup.sh` |
