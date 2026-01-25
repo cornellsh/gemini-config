@@ -6,7 +6,7 @@ USER_CONFIG_SRC="$REPO_ROOT/user-config"
 GLOBAL_GEMINI_DIR="$HOME/.gemini"
 LOCAL_GEMINI_DIR="$REPO_ROOT/.gemini"
 
-echo "Structured Gemini Configuration Setup (v1.2)"
+echo "Structured Gemini Configuration Setup (v1.2.2)"
 echo ""
 
 check_dependencies() {
@@ -22,7 +22,7 @@ check_dependencies() {
     fi
 
     if ! command -v rg &> /dev/null; then
-        echo "Warning: 'rg' (ripgrep) not found. Performance may be degraded."
+        echo "Warning: 'rg' (ripgrep) not found."
     fi
 }
 
@@ -129,9 +129,10 @@ install_global_config() {
 set_permissions() {
     echo "Setting file permissions..."
     chmod +x "$REPO_ROOT/scripts/"*.sh 2>/dev/null || true
-    if [ -d "$USER_CONFIG_SRC/hooks" ]; then
-        chmod +x "$USER_CONFIG_SRC/hooks/"* 2>/dev/null || true
-    fi
+    
+    # Secure all skill-based internal tools
+    find "$USER_CONFIG_SRC/skills" -name "*.sh" -exec chmod +x {} \;
+    find "$USER_CONFIG_SRC/skills" -name "*.js" -exec chmod +x {} \;
 }
 
 check_dependencies
@@ -143,7 +144,8 @@ echo ""
 echo "Setup complete."
 echo "Configured for: /refactor, /analyze, /qa, /mcp"
 echo ""
-echo "Recommended: Enable browser debugging by installing the official extension:"
-echo "gemini extensions install https://github.com/ChromeDevTools/chrome-devtools-mcp"
+echo "Recommended: Enable browser debugging:"
+echo "1. gemini extensions install https://github.com/ChromeDevTools/chrome-devtools-mcp"
+echo "2. run scripts/launch_browser.sh"
 echo ""
 echo "Start by running 'gemini' in your terminal."
