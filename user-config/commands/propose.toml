@@ -3,7 +3,8 @@ prompt = """
 ACTIVATE SKILL: product-strategist
 INSTRUCTION:
 1. Gather the requirements for "{{args}}".
-2. Draft a new OpenSpec proposal in openspec/changes/ with normative SHALL/MUST requirements.
-3. Define the technical scenarios (WHEN/THEN) for verification.
-4. Hand off to the orchestrator to initialize the execution queue.
+2. Draft a new OpenSpec proposal in openspec/changes/ following the strict formatting in openspec/AGENTS.md.
+3. Ensure every requirement has at least one "#### Scenario:" block with WHEN/THEN formatting.
+4. Run "openspec validate [change-id] --strict --no-interactive" to verify the proposal.
+5. Hand off to the orchestrator to initialize the execution queue in the session plan.
 """
