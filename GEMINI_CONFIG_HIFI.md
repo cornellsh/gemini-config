@@ -40,14 +40,17 @@ Read-only Markdown projection. Automatically synced by the orchestrator skill af
 
 | Agent | Responsibility | Tools & Capabilities |
 | :--- | :--- | :--- |
-| **Orchestrator** | **Session Manager**. Manages JSON state, dependencies, conflict detection. Syncs native `write_todos` UI. | `write_todos`, `save_memory`, `read/write_file` |
-| **Product Strategist** | **Intent & UX**. Translates user stories into specs and design flows. | `design.md`, `openspec/`, `web_fetch` |
-| **Polyglot Expert** | **Implementation**. Claims verified tasks. Enforces contracts. Research before coding ("Look Before You Leap"). | `replace` (Smart Edit), `web_fetch`, `search_file_content` |
-| **QA Verifier** | **Gatekeeper**. Reviews code, security scans, runs **active tests**. Enforces Policies. | `search_file_content` (ripgrep), `run_shell_command` |
-| **Browser Expert** | **Frontend Debugger**. Protocol-level (CDP) debugging, console monitoring, and network analysis via official Chrome DevTools MCP. | `browser_navigate`, `browser_screenshot`, `browser_get_console_logs` |
-| **Git Expert** | **Release Manager**. Atomic commits. Validates history. Respects `pre-commit` hooks. | `run_shell_command` (git) |
-| **Knowledge Architect** | **Technical Writing**. Produces API docs, manuals, and system diagrams. | `README.md`, `CHANGELOG.md`, `API.md` |
-| **Debt Architect** | **Refactoring**. Scalability, performance optimization, and axiom preservation. | `search_file_content`, `save_memory` |
+| **Orchestrator** | **System Manager**. Manages roadmap, dependencies, and state machine. | `write_todos`, `save_memory` |
+| **Product Strategist** | **Intent & UX**. OpenSpec governance and technical requirement drafting. | `openspec/`, `design.md` |
+| **Polyglot Expert** | **Logic Lead**. High-fidelity Python/TypeScript implementation. | `replace`, `web_fetch` |
+| **Database Architect** | **Data Lead**. Schema design, migrations, and indexing. | `SQL`, `migrations/`, `ORM` |
+| **Browser Specialist** | **Frontend Lead**. CDP diagnostics and visual fidelity. | `browser_navigate`, `CDP` |
+| **Infra/SRE Engineer** | **Ops Lead**. CI/CD, Docker, and repository stability. | `docker`, `actions/`, `git` |
+| **QA/Sec Auditor** | **Gatekeeper**. Active verification and secret scanning. | `search_file_content`, `tests/` |
+| **DX Engineer** | **Tooling Lead**. Automation, ergonomics, and setup scripts. | `scripts/`, `setup.sh` |
+| **Knowledge Architect** | **Technical Writer**. API docs, manuals, and system diagrams. | `README.md`, `API.md` |
+| **Debt Architect** | **Refactor Lead**. Scalability and performance profiling. | `profiling`, `refactoring` |
+
 
 ## Safety & Governance (v1.2)
 
