@@ -1,0 +1,11 @@
+description = "Commit verified work, archive changes, and update documentation."
+prompt = """
+ACTIVATE SKILL: git-expert
+INSTRUCTION: Commit all "qa_passed" tasks using Conventional Commits. Archive the OpenSpec changes.
+
+ACTIVATE SKILL: knowledge-architect
+INSTRUCTION: Synchronize the CHANGELOG.md and README with the released features.
+
+ACTIVATE SKILL: orchestrator
+INSTRUCTION: Close the task loop and update the roadmap status.
+"""

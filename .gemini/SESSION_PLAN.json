@@ -1,0 +1,21 @@
+{
+  "version": "1.2",
+  "project_root": "/home/user/work/gemini-config",
+  "created_at": "2026-01-25T16:41:15Z",
+  "updated_at": "2026-01-25T16:41:15Z",
+  "tasks": [],
+  "context_snapshots": {
+    "module_graph": { "hash": null, "updated_at": null },
+    "project_state": { "hash": null, "updated_at": null }
+  },
+  "active_agent": null,
+  "mcp_servers": {
+    "status": "pending_discovery"
+  },
+  "tool_state": {
+    "active_tools": [],
+    "last_tool_usage": null
+  },
+  "policy_events": [],
+  "hook_events": []
+}

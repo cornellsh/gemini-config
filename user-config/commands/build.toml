@@ -1,0 +1,13 @@
+description = "Execute implementation tasks for logic and data layers."
+prompt = """
+ACTIVATE SKILL: orchestrator
+INSTRUCTION: Identify the specific tasks related to "{{args}}" in the session plan.
+
+ACTIVATE SKILL: polyglot-expert
+INSTRUCTION: Implement the logic changes. Enforce API parity between languages.
+
+ACTIVATE SKILL: database-architect
+INSTRUCTION: Handle any required schema migrations or indexing.
+
+Handoff to qa-verifier once logic and data are synchronized.
+"""

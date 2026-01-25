@@ -1,6 +1,6 @@
 # Structured Gemini Configuration
 
-This repository provides a multi-agent orchestration framework for the Gemini CLI. It enables specialized agents to coordinate complex tasks in large monorepos through a central state machine.
+This repository provides a multi-agent orchestration framework for the Gemini CLI. It enables a team of 10 specialized senior agents to coordinate complex tasks through a central state machine.
 
 ## Quickstart
 
@@ -12,58 +12,41 @@ cd gemini-config
 ./scripts/setup.sh
 ```
 
-The script verifies system requirements, creates tracking files in `.gemini/`, and optionally installs the configuration and global scripts (`gemini-browser-launch`) to your home directory.
-
 ## Architecture
 
-The system uses a state-first approach where all agent actions are governed by a central plan.
+The system uses a state-first approach governed by a central plan and the OpenSpec protocol.
 
 ### Session Plan
 - Location: `.gemini/SESSION_PLAN.json`
-- Function: Single source of truth for task status, dependencies, and code snapshots.
-- Visibility: A read-only markdown projection is maintained at `.gemini/SESSION_PLAN.md`.
+- Function: Machine-readable truth for task status, dependencies, and code snapshots.
+- Human View: A read-only markdown projection is maintained at `.gemini/SESSION_PLAN.md`.
 
-### Specialized Agents
-- Orchestrator: Manages the task queue, dependencies, and file locks.
-- Product Strategist: Defines requirements and technical intent.
-- Polyglot Expert: Implements code across Python and TypeScript.
-- Database Architect: Manages storage schemas and migrations.
-- Browser Expert: Performs frontend debugging via the Chrome DevTools Protocol.
-- Git Expert: Handles commits and repository history.
-- QA Verifier: Executes automated tests and security validations.
-- DX Engineer: Optimizes internal tooling and environments.
-- Knowledge Architect: Maintains technical documentation and manuals.
-- Debt Architect: Manages scalability and refactoring.
+### The Team (Senior Agents)
+- Orchestrator: Roadmap, state governance, and dispatch.
+- Product Strategist: Technical intent and OpenSpec drafting.
+- Polyglot Expert: Python/TypeScript implementation.
+- Database Architect: Schema migrations and integrity.
+- Browser Specialist: UI diagnostics and CDP telemetry.
+- SRE/Infra Engineer: Atomic releases and stability.
+- QA Auditor: Active verification and security scanning.
+- DX Engineer: Tooling and environment readiness.
+- Knowledge Architect: Technical documentation and manuals.
+- Debt Architect: Performance and scalability refactoring.
 
-## Common Workflows
+## Phase-Driven Workflows
 
-The following commands initiate coordinated agent loops:
+The CLI is organized into professional project phases:
 
-- `/design <topic>`: Translate requirements into technical intent and OpenSpec proposals.
-- `/refactor <topic>`: Define and implement a code change or new feature.
-- `/analyze <path>`: Evaluate architecture and identify technical debt.
-- `/qa`: Run project tests and verify completed work.
-- `/browser <url>`: Execute protocol-level diagnostics and visual verification.
-- `/release`: Commit verified tasks and archive proposals.
-- `/dispatch`: Scan the plan and activate the next logical specialist.
-- `/mcp`: View connection status for external tools.
+- `/propose <intent>`: Draft a technical spec and scenarios.
+- `/build <target>`: Execute implementation across logic and data layers.
+- `/audit <target>`: Perform health, security, and complexity scans.
+- `/debug <context>`: Investigate and resolve UI or logic failures.
+- `/ship`: Commit verified work, archive changes, and update docs.
+- `/sync`: Pre-flight tools, environment, and memory.
+- `/status`: View roadmap bottlenecks and next steps.
 
-## Browser Debugging
+## Safety and Governance
 
-To use the Browser Expert, you must have Chrome running with remote debugging enabled. You can use the global command installed by `setup.sh`:
-
-```bash
-gemini-browser-launch
-```
-
-Additionally, install the official extension:
-
-```bash
-gemini extensions install https://github.com/ChromeDevTools/chrome-devtools-mcp
-```
-
-## Safety and Extensions
-
-- Policies: Access controls defined in `user-config/policies/` prevent unauthorized destructive actions.
-- Hooks: Lifecycle scripts in `user-config/hooks/` provide automated auditing and validation.
+- Policies: Access controls in `user-config/policies/` prevent unauthorized destructive actions.
+- Hooks: Automated interceptors in `user-config/hooks/` record tool usage for auditing.
 - Memory: High-level architectural axioms are persisted using the `save_memory` tool.

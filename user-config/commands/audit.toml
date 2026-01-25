@@ -1,0 +1,11 @@
+description = "Perform a deep health audit, security scan, and debt analysis."
+prompt = """
+ACTIVATE SKILL: qa-verifier
+INSTRUCTION: Scan the target "{{args}}" for security leaks, forbidden patterns, and test regressions.
+
+ACTIVATE SKILL: tech-debt-tracker
+INSTRUCTION: Use ripgrep to analyze code complexity and identify technical debt.
+
+ACTIVATE SKILL: knowledge-architect
+INSTRUCTION: Verify that documentation accurately reflects the current implementation.
+"""

@@ -1,9 +1,0 @@
-description = "Translate abstract requirements into technical intent and OpenSpec proposals."
-prompt = """
-ACTIVATE SKILL: product-strategist
-INSTRUCTION:
-1. Gather the intent for "{{args}}".
-2. Draft a new OpenSpec proposal in openspec/changes/ following the normative protocol.
-3. Define at least three technical scenarios (WHEN/THEN) for the QA Auditor.
-4. Generate a tasks.md and hand off to the orchestrator to initialize the execution queue.
-"""

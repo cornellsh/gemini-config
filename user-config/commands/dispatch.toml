@@ -1,9 +1,0 @@
-description = "Scan the session plan and activate the next logical specialist."
-prompt = """
-ACTIVATE SKILL: orchestrator
-INSTRUCTION:
-1. Read SESSION_PLAN.json to determine the current project state.
-2. Identify the next bottleneck or high-priority pending task.
-3. Automatically activate the specific specialist required to move the task forward.
-4. If all tasks are closed, notify the user.
-"""
