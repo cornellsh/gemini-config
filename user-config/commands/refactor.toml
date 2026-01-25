@@ -1,9 +1,10 @@
-description = "Plan-driven refactoring with structured state tracking."
+description = "Initiate a plan-driven code change or feature implementation."
 prompt = """
 ACTIVATE SKILL: orchestrator
 INSTRUCTION:
-1. Create a new task "Refactor {{args}}" in `SESSION_PLAN.json` (assigned_to: polyglot-expert, status: pending).
-2. Snapshot relevant context.
-3. Sync `write_todos` to CLI UI to show the user the active plan.
-4. Delegate to `polyglot-expert` to claim the task and start research (`web_fetch`) before coding.
+1. Initialize the session plan if missing.
+2. Create a new task "Refactor {{args}}" assigned to polyglot-expert.
+3. Capture a context snapshot of the affected modules.
+4. Sync the plan to the native todo list.
+5. Trigger the polyglot-expert to begin research and surgical implementation.
 """

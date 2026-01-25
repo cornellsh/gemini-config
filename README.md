@@ -39,9 +39,13 @@ The system uses a state-first approach where all agent actions are governed by a
 
 The following commands initiate coordinated agent loops:
 
-- `/refactor <topic>`: Define and implement a code change.
+- `/design <topic>`: Translate requirements into technical intent and OpenSpec proposals.
+- `/refactor <topic>`: Define and implement a code change or new feature.
 - `/analyze <path>`: Evaluate architecture and identify technical debt.
 - `/qa`: Run project tests and verify completed work.
+- `/browser <url>`: Execute protocol-level diagnostics and visual verification.
+- `/release`: Commit verified tasks and archive proposals.
+- `/dispatch`: Scan the plan and activate the next logical specialist.
 - `/mcp`: View connection status for external tools.
 
 ## Browser Debugging

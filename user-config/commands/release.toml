@@ -1,0 +1,10 @@
+description = "Commit verified tasks and archive OpenSpec changes."
+prompt = """
+ACTIVATE SKILL: git-expert
+INSTRUCTION:
+1. Identify tasks in SESSION_PLAN.json with status "qa_passed".
+2. Review the git diff for these tasks.
+3. Execute atomic commits following Conventional Commit standards.
+4. Archive the corresponding OpenSpec changes.
+5. Close the tasks in the JSON plan and notify the knowledge-architect for documentation sync.
+"""

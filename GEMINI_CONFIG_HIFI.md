@@ -82,21 +82,26 @@ gemini-config/
 
 ## Workflows
 
-### 1. Plan-Driven Refactoring (/refactor <target>)
-1.  **Orchestrator**: Creates task `Refactor <target>` in JSON. Snapshots context. Syncs `write_todos` to UI. Delegates to `polyglot-expert`.
-2.  **Polyglot Expert**: Claims task. Uses `web_fetch` to check docs. Implements via `replace` (Smart Edit). Updates JSON to `completed`.
-3.  **QA Verifier**: Claims `completed` task. Runs `search_file_content` (security) and `run_shell_command` (tests). Updates JSON to `qa_passed`.
-4.  **Git Expert**: Claims `qa_passed` task. Stages & commits via `git`. Updates JSON to `closed`.
+### 1. Feature Lifecycle (/design -> /refactor -> /qa -> /release)
+1.  **Product Strategist** (/design): Drafts OpenSpec proposal and scenarios.
+2.  **Orchestrator** (/refactor): Initializes task queue and delegates implementation.
+3.  **Polyglot Expert**: Implements changes and signals completion.
+4.  **QA Verifier** (/qa): Executes active tests against scenarios.
+5.  **Git Expert** (/release): Atomic commit and OpenSpec archival.
 
-### 2. Architectural Analysis (/analyze <target>)
-1.  **Orchestrator**: Snapshots `module-graph.md`. Creates "Analyze <target>" task.
-2.  **Execution**: Scans codebase using `search_file_content` and `glob`.
-3.  **Reporting**: Logs findings as new tasks in `SESSION_PLAN.json`.
+### 2. Architectural Analysis (/analyze)
+1.  **Orchestrator**: Snapshots module graph.
+2.  **Debt Architect**: Scans for rot using ripgrep.
+3.  **Reporting**: Findings logged as memory axioms or implementation tasks.
 
-### 3. Quality Assurance (/qa)
-1.  **QA Verifier**: Scans JSON for *all* `completed` tasks.
-2.  **Active Test**: Runs project-specific test commands (sandboxed if enabled).
-3.  **Feedback**: Rejects (`in_progress`) or Approves (`qa_passed`) in bulk.
+### 3. Frontend Diagnostics (/browser)
+1.  **DX Engineer**: Pre-flight environment check (Port 9222).
+2.  **Browser Expert**: Protocol-level telemetry and screenshot capture.
+3.  **Adjudication**: High-signal diagnostics reported to the team.
+
+### 4. Autonomous Handoff (/dispatch)
+1.  **Orchestrator**: Scans JSON state machine.
+2.  **Dispatch**: Logic-driven activation of the required specialist to clear the next bottleneck.
 
 ## Usage
 

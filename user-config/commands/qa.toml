@@ -1,13 +1,10 @@
-description = "Trigger a structured QA review cycle."
+description = "Execute project tests and verify completed implementations."
 prompt = """
 ACTIVATE SKILL: qa-verifier
 INSTRUCTION:
-1. Read `SESSION_PLAN.json`.
-2. Find all tasks with `status: completed`.
-3. For each task:
-   - Run `search_file_content` to check for security issues/TODOs.
-   - Run `run_shell_command` to execute project tests (prefer sandbox).
-   - Verify compliance with any active Policies.
-4. Update status to `qa_passed` or `pending` (if rejected).
-5. Sync `SESSION_PLAN.md`.
+1. Identify all tasks in SESSION_PLAN.json with status "completed".
+2. For each task, execute the specific test suites required by the OpenSpec scenarios.
+3. Use run_shell_command for active verification (prioritize sandbox).
+4. Scan for security leaks or forbidden patterns using ripgrep.
+5. Adjudicate results: update to "qa_passed" or revert to "pending" with a technical rejection reason.
 """
