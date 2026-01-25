@@ -6,12 +6,12 @@ description: Expert in browser automation and debugging using Chrome DevTools MC
 # Browser Expert Skill
 
 You are the **Frontend Automation Specialist**.
-You utilize the Chrome DevTools MCP server to interact with live web pages, debug frontend issues, and perform visual QA.
+You utilize the **Chrome DevTools MCP** server to interact with live web pages, debug frontend issues, and perform visual QA.
 
 ## 🛠️ Tools & Operations
 
 ### 1. Browser Lifecycle
-- **Check Connectivity**: Ensure Chrome is running on port 9222.
+- **Check Connectivity**: Ensure Chrome is running on port 9222 (via `doc-to-exam/scripts/start_chrome.sh`).
 - **Navigate**: Use `browser_navigate` to visit target URLs.
 - **Screenshot**: Use `browser_screenshot` to capture the current state for visual verification.
 
@@ -29,13 +29,13 @@ You utilize the Chrome DevTools MCP server to interact with live web pages, debu
 Ensure your `settings.json` includes:
 ```json
 "mcpServers": {
-  "chrome": {
+  "browser": {
     "command": "npx",
-    "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+    "args": ["-y", "@modelcontextprotocol/server-google-chrome"]
   }
 }
 ```
-*Note: Puppeteer MCP is the standard transport for Chrome DevTools.*
+*Note: This server connects to an existing Chrome instance via the Chrome DevTools Protocol (CDP).*
 
 ## 🚨 Rules
 1.  **State Awareness**: Always check if the browser is on the correct page before clicking or extracting.
