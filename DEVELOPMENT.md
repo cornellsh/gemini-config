@@ -38,13 +38,16 @@ When modifying the state, adhere to this structure:
 }
 ```
 
-## Extending the System
+## Team Evolution (The Skill Forge)
 
-### Adding a Skill
-1.  Create a folder in `user-config/skills/<name>/`.
-2.  Add a `SKILL.md` file. 
-3.  Define the **Operational Protocol**: How the skill reads JSON, what tools it uses, and how it updates the task status.
-4.  Specify **Handoff Rules**: Which skill should be activated after this one completes?
+The configuration is self-expanding. If the team lacks a specific capability (e.g., a "Mobile Specialist" or "Cloud Security Engineer"), the Lead Architect follows the Forge Protocol:
+
+1.  **Analyze**: Determine the necessary Persona and Rules for the new domain.
+2.  **Generate**: Create a new folder in `user-config/skills/` with a `SKILL.md` file.
+3.  **Register**: The new agent must be BMAD-aligned (Persona, Knowledge, Rules, Workflow).
+4.  **Provision**: Run `scripts/setup.sh` to symlink the new capability into the global environment.
+
+Once forged, the new specialist is "unlocked" and can participate in the orchestration loop.
 
 ### Adding a Command
 1.  Create a `.toml` file in `user-config/commands/`.
