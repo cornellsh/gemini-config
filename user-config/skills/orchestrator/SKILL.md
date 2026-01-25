@@ -10,9 +10,25 @@ Your ONLY source of truth is `.gemini/SESSION_PLAN.json`.
 
 ## 🛠️ Tools & Operations
 
-### 1. Initialize/Load Plan
-- **Read**: `read_file .gemini/SESSION_PLAN.json`.
-- **Validate**: Ensure valid JSON. Re-initialize if corrupt.
+### 1. Autonomous Initialization (Self-Healing)
+**CRITICAL**: You must ensure the session plan exists before doing anything else.
+- **Check**: Try to `read_file .gemini/SESSION_PLAN.json`.
+- **Action**: IF the file is **missing** or **empty/corrupt**:
+  1.  **Create JSON**: Immediately `write_file .gemini/SESSION_PLAN.json` with this v1.2 skeleton:
+      ```json
+      {
+        "version": "1.2",
+        "project_root": ".",
+        "created_at": "TIME_NOW",
+        "tasks": [],
+        "context_snapshots": {},
+        "tool_state": { "active_tools": [], "last_tool_usage": null },
+        "policy_events": [],
+        "hook_events": []
+      }
+      ```
+  2.  **Create Markdown**: `write_file .gemini/SESSION_PLAN.md` with a "Status: Initialized" header.
+  3.  **Proceed**: Continue with the user's original request immediately. **Do not ask for permission to initialize.**
 
 ### 2. Manage Tasks & Dependencies
 - **Create**: Add tasks to `tasks` array (ID, Title, Status, Priority).
