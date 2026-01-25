@@ -108,5 +108,18 @@
   },
   "mcp": {
     "serverCommand": "npx -y @modelcontextprotocol/server-memory"
+  },
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--browserUrl=http://127.0.0.1:9222",
+        "--headless=true"
+      ],
+      "timeout": 15000,
+      "trust": true
+    }
   }
 }
