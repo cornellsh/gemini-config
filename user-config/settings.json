@@ -2,7 +2,7 @@
   "general": {
     "previewFeatures": true,
     "enableAutoUpdate": true,
-    "enablePromptCompletion": true,
+    "enablePromptCompletion": false,
     "debugKeystrokeLogging": false,
     "sessionRetention": {
       "enabled": true,
@@ -39,7 +39,7 @@
       "enableLoadingPhrases": true,
       "screenReader": false
     },
-    "theme": "Dracula"
+    "theme": "ansi"
   },
   "model": {
     "maxSessionTurns": -1,
