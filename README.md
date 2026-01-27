@@ -1,52 +1,55 @@
-# Structured Gemini Configuration
+# gemini-config
 
-This repository provides a multi-agent orchestration framework for the Gemini CLI. It enables a team of 10 specialized senior agents to coordinate complex tasks through a central state machine.
+This repository provides a set of tools and configurations for the Gemini CLI, specifically optimized for the [BMad Method](https://github.com/bmad-code-org/BMAD-METHOD).
+
+It provides standardized interfaces for managing development environments, version control, and browser-based testing.
 
 ## Quickstart
 
-Run the setup script to initialize the environment:
-
 ```bash
+# 1. Clone the repository
 git clone https://github.com/cornellsh/gemini-config.git
 cd gemini-config
+
+# 2. Run the setup script to link configurations globally
 ./scripts/setup.sh
 ```
 
-## Architecture
+## Included Tools
 
-The system uses a state-first approach governed by a central plan and the OpenSpec protocol.
+The configuration provides five core utilities for technical execution:
 
-### Session Plan
-- Location: `.gemini/SESSION_PLAN.json`
-- Function: Machine-readable truth for task status, dependencies, and code snapshots.
-- Human View: A read-only markdown projection is maintained at `.gemini/SESSION_PLAN.md`.
+1.  **Docker Tooling** (`/docker:*`): Manage containers, view logs, and reset runtime environments.
+2.  **Network Utilities** (`/net:*`): Debug port conflicts and verify service connectivity.
+3.  **Code Navigation** (`/code:*`): Map project structure and track function/variable references.
+4.  **Browser Control** (`/browser:*`): Control headless Chrome for UI verification.
+5.  **Git Management**: Maintain clean repository history and follow commit standards.
 
-### The Team (Senior Agents)
-- Orchestrator: Roadmap, state governance, and dispatch.
-- Product Strategist: Technical intent and OpenSpec drafting.
-- Polyglot Expert: Python/TypeScript implementation.
-- Database Architect: Schema migrations and integrity.
-- Browser Specialist: UI diagnostics and CDP telemetry.
-- SRE/Infra Engineer: Atomic releases and stability.
-- QA Auditor: Active verification and security scanning.
-- DX Engineer: Tooling and environment readiness.
-- Knowledge Architect: Technical documentation and manuals.
-- Debt Architect: Performance and scalability refactoring.
+## Usage
 
-## Phase-Driven Workflows
+### Direct Commands
+Use namespaced commands for repetitive tasks:
 
-The CLI is organized into professional project phases:
+- **Start Browser**: `gemini /browser:start`
+- **Port Audit**: `gemini /net:ports`
+- **Project Tree**: `gemini /code:map`
+- **Service Status**: `gemini /docker:status`
 
-- `/propose <intent>`: Draft a technical spec and scenarios.
-- `/build <target>`: Execute implementation across logic and data layers.
-- `/audit <target>`: Perform health, security, and complexity scans.
-- `/debug <context>`: Investigate and resolve UI or logic failures.
-- `/ship`: Commit verified work, archive changes, and update docs.
-- `/sync`: Pre-flight tools, environment, and memory.
-- `/status`: View roadmap bottlenecks and next steps.
+### Technical Support
+You can request assistance with complex engineering tasks by referencing the specific toolset:
 
-## Safety and Governance
+> "Use the **Docker** tools to fix the port conflict on 3000."
+> "Use the **Browser** tools to verify the user registration flow."
 
-- Policies: Access controls in `user-config/policies/` prevent unauthorized destructive actions.
-- Hooks: Automated interceptors in `user-config/hooks/` record tool usage for auditing.
-- Memory: High-level architectural axioms are persisted using the `save_memory` tool.
+## Configuration Structure
+
+- **`user-config/skills/`**: Technical guides and troubleshooting protocols.
+- **`user-config/commands/`**: Command shortcuts for the CLI.
+- **`user-config/GEMINI.md`**: Main project context and role definition.
+- **`scripts/`**: Shell scripts for environment setup and browser management.
+
+## BMad Integration
+
+This runtime is built to support BMad agents by handling technical execution:
+- **Project Truth**: Uses `_bmad-output/` as the primary reference for requirements.
+- **Execution**: Performs the engineering steps defined in `_bmad/workflows/`.

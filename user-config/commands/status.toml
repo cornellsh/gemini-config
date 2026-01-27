@@ -1,5 +1,0 @@
-description = "View the current project roadmap and task bottlenecks."
-prompt = """
-ACTIVATE SKILL: orchestrator
-INSTRUCTION: Provide a technical summary of the roadmap. Identify the next logical task and the agent responsible for it.
-"""

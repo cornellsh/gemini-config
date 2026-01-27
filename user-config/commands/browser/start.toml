@@ -1,0 +1,2 @@
+description = "Launch the headless Chrome instance for debugging."
+prompt = "Please run the shell command `gemini-browser-launch` to start the headless browser. Explain that you are launching it on port 9222 and waiting for initialization."

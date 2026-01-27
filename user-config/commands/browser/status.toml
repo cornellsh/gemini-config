@@ -1,0 +1,2 @@
+description = "Check if the remote debugging browser is responding."
+prompt = "Please run the shell command `curl -s http://127.0.0.1:9222/json/version` to check the status of the headless browser. If it fails, suggest the user run `/browser:start`."

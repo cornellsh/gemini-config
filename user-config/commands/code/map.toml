@@ -1,0 +1,2 @@
+description = "Generate a high-level map of the project structure."
+prompt = "Run `tree -L 2 -I 'node_modules|.git|dist|build|coverage'` to show the project architecture."

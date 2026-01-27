@@ -133,15 +133,12 @@ install_global_config() {
     }
 
     symlink_file "$USER_CONFIG_SRC/settings.json" "$GLOBAL_GEMINI_DIR/settings.json"
+    symlink_file "$USER_CONFIG_SRC/GEMINI.md" "$GLOBAL_GEMINI_DIR/GEMINI.md"
     
     sync_dir "$USER_CONFIG_SRC/skills" "$GLOBAL_GEMINI_DIR/skills"
     sync_dir "$USER_CONFIG_SRC/hooks" "$GLOBAL_GEMINI_DIR/hooks"
     sync_dir "$USER_CONFIG_SRC/policies" "$GLOBAL_GEMINI_DIR/policies"
     sync_dir "$USER_CONFIG_SRC/commands" "$GLOBAL_GEMINI_DIR/commands"
-
-    # Context handled separately as it's often a single target
-    rm -rf "$GLOBAL_GEMINI_DIR/context"
-    ln -sf "$USER_CONFIG_SRC/context" "$GLOBAL_GEMINI_DIR/context"
 
     echo "   Installing global scripts to $GLOBAL_BIN_DIR..."
     ln -sf "$REPO_ROOT/scripts/launch_browser.sh" "$GLOBAL_BIN_DIR/gemini-browser-launch"

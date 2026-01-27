@@ -88,24 +88,6 @@
     "useOSC52Paste": true,
     "plan": true
   },
-  "hooksConfig": {
-    "enabled": true,
-    "notifications": true
-  },
-  "hooks": {
-    "BeforeTool": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "name": "audit-log",
-            "command": "bash $GEMINI_PROJECT_DIR/.gemini/hooks/log-tools.sh",
-            "timeout": 2000
-          }
-        ]
-      }
-    ]
-  },
   "mcp": {
     "serverCommand": "npx -y @modelcontextprotocol/server-memory"
   },

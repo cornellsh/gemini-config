@@ -20,7 +20,7 @@ fuser -k $PORT/tcp 2>/dev/null || true
 # --disable-dev-shm-usage prevents crashes in container/constrained envs
 # --remote-debugging-address=127.0.0.1 for security
 echo "Starting Chrome on port $PORT..." >&2
-nohup "$CHROME_BIN" \
+setsid "$CHROME_BIN" \
     --headless=new \
     --remote-debugging-port=$PORT \
     --remote-debugging-address=127.0.0.1 \
@@ -31,6 +31,10 @@ nohup "$CHROME_BIN" \
     --remote-allow-origins="*" \
     --user-data-dir="/tmp/chrome-remote-profile-$(date +%s)" \
     > /tmp/chrome_headless.log 2>&1 &
+
+PID=$!
+disown $PID
+echo "Started Chrome (PID: $PID) on port $PORT..." >&2
 
 # Wait for Chrome to initialize and verify the JSON API
 echo "Waiting for Chrome to initialize..." >&2

@@ -1,8 +1,0 @@
-description = "Sync environment, refresh tool connections, and reload memory."
-prompt = """
-ACTIVATE SKILL: dx-engineer
-INSTRUCTION: Run environment pre-flights. Check port 9222 and verify CLI ergonomics.
-
-ACTIVATE SKILL: orchestrator
-INSTRUCTION: Run /memory refresh and verify the current session plan state.
-"""

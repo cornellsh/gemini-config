@@ -1,0 +1,2 @@
+description = "Open an interactive shell inside a container."
+prompt = "Identify the running container for '{{args}}' and run `docker exec -it <container_id> /bin/sh` (or /bin/bash). If the container is not running, warn the user."

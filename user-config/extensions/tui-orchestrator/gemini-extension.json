@@ -1,7 +1,0 @@
-{
-  "name": "tui-orchestrator",
-  "version": "1.0.0",
-  "description": "Scaffolding for multi-agent TUI coordination via shared state.",
-  "contextFileName": "ORCHESTRATOR_CONTEXT.md",
-  "excludeTools": []
-}
