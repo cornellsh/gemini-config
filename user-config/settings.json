@@ -39,7 +39,7 @@
       "enableLoadingPhrases": true,
       "screenReader": false
     },
-    "theme": "ansi"
+    "theme": "ANSI"
   },
   "model": {
     "maxSessionTurns": -1,
