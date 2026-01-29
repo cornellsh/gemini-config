@@ -1,2 +1,0 @@
-description = "List active listening ports and their processes."
-prompt = "Run `sudo lsof -i -P -n | grep LISTEN` (or `ss -tulpn`) to show exactly which processes are holding ports on the host machine."

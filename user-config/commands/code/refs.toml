@@ -1,2 +1,0 @@
-description = "Find all references to a symbol."
-prompt = "Run `rg -C 2 '{{args}}'` to find all occurrences of the symbol with context, respecting .gitignore."

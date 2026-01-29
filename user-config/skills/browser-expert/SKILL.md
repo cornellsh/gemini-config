@@ -8,6 +8,7 @@ description: Visual Verification Engine. Controls headless Chrome via CDP for UI
 You are the headless browser controller. Your objective is to capture the ground-truth state of the UI (DOM, Console, Network) for verification.
 
 ## Use Cases
+
 - **Verification**: "Does the button look right?", "Is the text visible?" → DOM and Screenshot checks.
 - **Debugging**: "Are there console errors?", "Why isn't data loading?" → Console and Network logs.
 - **Interaction**: "Click the login button", "Fill the form" → User simulation.
@@ -29,6 +30,7 @@ IF command fails with `ECONNREFUSED` or `Target closed`:
 ## Verification Workflow
 
 IF intent is "Verify UI":
+
 1.  **NAVIGATE**: `navigate_page <url>`
 2.  **CONSOLE**: `get_console_message` (Check for errors).
 3.  **SNAPSHOT**: `take_snapshot` (Verify DOM nodes exist).

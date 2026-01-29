@@ -1,2 +1,0 @@
-description = "Show status of all running containers."
-prompt = "Run the shell command `docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'` to show a clean dashboard of active containers."

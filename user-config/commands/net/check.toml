@@ -1,2 +1,0 @@
-description = "Deep inspect a URL (Headers, DNS, SSL)."
-prompt = "Run `curl -v -L {{args}}` to inspect the full connection handshake, headers, and response body for the target URL."

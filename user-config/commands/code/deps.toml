@@ -1,2 +1,0 @@
-description = "List project dependencies."
-prompt = "Read the relevant manifest file (package.json, requirements.txt, Cargo.toml) and list the production and dev dependencies."

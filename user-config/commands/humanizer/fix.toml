@@ -1,0 +1,2 @@
+description = "Rewrite text to sound more human using the Humanizer skill."
+prompt = "Activate the 'humanizer' skill. Then, asking the user for the text if they haven't provided it, rewrite the text following the skill's instructions to remove AI patterns and add personality."

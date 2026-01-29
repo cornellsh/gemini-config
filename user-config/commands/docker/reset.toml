@@ -1,2 +1,0 @@
-description = "Hard reset the docker runtime (Down + Up)."
-prompt = "Explain that you are about to restart the environment. Run `docker compose down -v` to remove volumes (cleaning state), then `docker compose up -d` to restart fresh."

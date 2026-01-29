@@ -1,10 +1,6 @@
 # gemini-config
 
-Configuration and tools for the Gemini CLI, optimized for the [BMad Method](https://github.com/bmad-code-org/BMAD-METHOD).
-
-This gives Gemini a standardized way to manage development environments, version control, and browser testing.
-
-## Quickstart
+## Getting Started
 
 ```bash
 git clone https://github.com/cornellsh/gemini-config.git
@@ -12,44 +8,25 @@ cd gemini-config
 ./scripts/setup.sh
 ```
 
-## Included Tools
+## What's in here?
 
-Five utilities for common development tasks:
+**Browser Control (`/browser:*`)**  
+I use this to spin up headless Chrome. It's helpful when I need to verify that a UI actually works instead of just guessing.
 
-1. **Docker Tooling** (`/docker:*`): Manage containers, view logs, and reset runtime environments
-2. **Network Utilities** (`/net:*`): Debug port conflicts and check service connectivity
-3. **Code Navigation** (`/code:*`): Map project structure and track function/variable references
-4. **Browser Control** (`/browser:*`): Control headless Chrome for UI verification
-5. **Git Management**: Maintain repository history and follow commit standards
+**The Humanizer**  
+This is a skill to strip out all the "pivotal moments" and "digital landscapes" that AI loves to hallucinate.
 
-## Usage
+## How I use it
 
-### Direct Commands
+If I need to check a site, I just run:  
+`gemini /browser:start`
 
-Use namespaced commands for repetitive tasks:
+If a piece of writing feels "off" or too robotic, I'll tell Gemini:  
+"Run the humanizer on this."
 
-- Start browser: `gemini /browser:start`
-- Port audit: `gemini /net:ports`
-- Project tree: `gemini /code:map`
-- Service status: `gemini /docker:status`
+## The Structure
 
-### Getting help
-
-Reference specific toolsets when you need help with complex tasks:
-
-- "Use the Docker tools to fix the port conflict on 3000"
-- "Use the Browser tools to verify the user registration flow"
-
-## Configuration Structure
-
-- `user-config/skills/` - Technical guides and troubleshooting protocols
-- `user-config/commands/` - Command shortcuts for the CLI
-- `user-config/GEMINI.md` - Main project context and role definition
-- `scripts/` - Shell scripts for environment setup and browser management
-
-## BMad Integration
-
-This supports BMad agents by handling technical execution:
-
-- **Project Truth**: Uses `_bmad-output/` as the primary reference for requirements
-- **Execution**: Performs engineering steps defined in `_bmad/workflows/`
+- `user-config/skills/`: Where I keep the logic for things like the humanizer.
+- `user-config/commands/`: Shortcuts for the CLI.
+- `user-config/GEMINI.md`: The "master" instructions for how I want the CLI to behave.
+- `scripts/`: Mostly just the setup and browser launch scripts.
